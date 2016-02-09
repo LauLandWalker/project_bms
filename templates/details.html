@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title_block %} Homepage {% endblock %}</title>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/overrides.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/override.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+
+<h2>Family Members</h2>
+    <table class="table table-striped table-hover table-condensed table-responsive table-bordered">
+
+
+        {% if relatives %}
+            <thead class="thead-default">
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Relation</th>
+                <th>Civil Status</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for relative in relatives %}
+                <tr data-href="{% url 'BMS_app:PersonDetails' pk=relative.id %}" >
+                    <th  scope="row"></th>
+                    <td>{{ relative.first_name }}</td>
+                    <td>{{ relative.middle_name }}</td>
+                    <td>{{ relative.last_name }}</td>
+                    <td>{{ relative.age }}</td>
+                    <td>{{ relative.dob }}</td>
+                    <td>{{ relative.gender }}</td>
+                    <td>{{ relative.relation }}</td>
+                    <td>{{ relative.civil_status }}</td>
+                    <td>{{ relative.address }}</td>
+                    <td>{{ relative.contact_number }}</td>
+                    <td>{{ relative.email }}</td>
+
+                    <td>
+                        <a href="{% url 'BMS_app:UpdateRelative' pk=relative.id %}">
+                            <button type="button" class="btn btn-primary btn-block">Update</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="{% url 'BMS_app:DeleteRelative' pk=relative.id %}">
+                            <button type="button" class="btn btn-danger btn-block">Delete</button>
+                        </a>
+                    </td>
+
+
+
+
+
+                </tr>
+            {% endfor %}
+        {% else %}
+            <h4>Click <a href="{% url 'BMS_app:CreateRelatives' pk=pk_id.pk %}">this</a> to register a family member </h4>
+        {% endif %}
+
+        </tbody>
+    </table>
+
+    <p>
+    <h4><a href="{% url 'BMS_app:ListAll' %}">Go Back</a></h4></p>
+
+</body>
+</html>

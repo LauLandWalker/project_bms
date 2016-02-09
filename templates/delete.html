@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title_block %}
+    Delete
+{% endblock %}
+{% load bootstrap3 %}
+{% block body_block %}
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+        </div>
+
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="confirmation-box">
+                <h3>Would you like to delete this item?</h3>
+                <div>
+                    <a href="{% url 'BMS_app:ListAll' %}">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" >No, Please Return Me Back</button>
+                    </a>
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{% url 'BMS_app:ListAll' %}" />
+
+                        <br>
+                        <button type="submit" class="btn btn-danger btn-lg btn-block" >Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+        </div>
+
+{% endblock %}
